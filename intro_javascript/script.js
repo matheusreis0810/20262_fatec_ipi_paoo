@@ -1,3 +1,21 @@
+var nome = 'José'
+console.log(nome)
+nome = "João"
+console.log(nome)
+
+/* let nome = "Ana"
+console.log(nome)
+nome = "Ana Maria"
+console.log(nome) */
+
+
+/* //O CONST NAO DEIXA A VARIAVEL SER MODIFICADA
+const nome = 'José'
+console.log(nome);
+nome = 'Joao'
+ */
+
+
 //comecando...
 //declaracao de variavel -> const, let, var e tambem pode deixar sem nada
 //as variaveis nao tem tipo, elas sao tipo ponteiros q apontam para objs
