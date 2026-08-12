@@ -1,3 +1,72 @@
+//OBJETOS JAVASCRIPT
+//OBJETO JSON (JavaScript Object Notation)
+
+//calculadora
+const calculadora = {
+    somar: function(a, b){
+        return a + b
+    },
+    subtrair: (a,b) => a - b
+}
+console.log(calculadora.somar(2,5))
+console.log(calculadora.subtrair(5-2))
+
+//Uma concessionaria que tem CNPJ e endereço. Endereço tem rua, bairro e numero. 
+//A concessionaria tem uma coleção de veiculos. Cada Veiculo tem marca, modelo e ano de fabricação
+let concessionaria = {
+    cnpj: 900,
+    endereco: {
+        rua: "X",
+        bairro: "A",
+        numero: 11
+    },
+    veiculos: [
+        {
+            marca: "fiat",
+            modelo: "uno",
+            ano: 2020
+        },
+        {
+            marca: "ford",
+            modelo: "ka",
+            ano: 2000
+        }
+    ]
+}
+for(let veiculo of concessionaria.veiculos){
+    console.log(veiculo.marca)
+    console.log(veiculo.modelo)
+    console.log(veiculo.ano)
+}
+console.log(concessionaria.cnpj)
+console.log("Rua: " + concessionaria.endereco.rua)
+console.log("Bairro: " + concessionaria.endereco.bairro)
+console.log("Numero: " + concessionaria.endereco.numero)
+
+//Uma pessoa que se chama Maria, tem 21 anos e mora na rua B, numero 20
+let pessoa2 = {
+    nome: "Maria",
+    idade: 21,
+    endereco: {
+        rua: "B",
+        numero: 20
+    }
+}
+console.log(pessoa2.nome)
+console.log(pessoa2.idade)
+console.log("Rua : " + pessoa2.endereco.rua)
+console.log("Numero: " + pessoa2.endereco.numero)
+
+//Uma pessoa e se chama João e tem 17 anos
+let pessoa = {
+    nome: "João",
+    idade: 17
+}
+console.log(pessoa.nome)
+console.log(pessoa['idade'])
+console.log(pessoa.idade)
+
+
 /* function eAgora(){
     let cont = 1
     function f1(){
