@@ -1,4 +1,118 @@
-//OBJETOS JAVASCRIPT
+//Execução Síncrona e Assíncrona
+
+//PROMISE
+//é um objeto do js, associado a uma função q representa uma funcao demorada
+//o objeto sempre vai estar Pending (executando), Rejected (deu erro) ou Fullfilled (deu certo)
+
+//1 + 2 +  3 + ..... (n-2) + (n-1) + n
+const calculoRapidinho = (n) => {
+    //ajustar essa função
+    //se n for negativo, devolver uma promise rejected, associada ao texto "Apenas positivos"
+    //caso contrario, devolver essa promise que ja é devolvida no momento
+    return n>=0 ? Promise.resolve((n/2) * (n+1)) : Promise.reject("Apenas positivos")
+}
+//tratar ambos os casos usando then ou catch
+calculoRapidinho(-1)
+.then((res) => console.log(`Resultado: ${res}`))
+.catch((erro) => console.log(`Erro: ${erro}`))
+
+// function calculoDemorado(n){
+//     return new Promise(function(resolve, reject){
+//         let res = 0
+//         for(let i = 1; i<= n; i++){
+//             res += i
+//         }
+//         resolve(res)
+//     })
+// }
+// //construção then/catch 
+// //execute a funcao calculoDemorado e depois o q vem no then (2 tipos de fazer)
+// //const a = calculoDemorado(100).then((resultado) => {console.log(resultado)})
+// const auxiliar = calculoDemorado(100)
+// auxiliar.then(function(res){
+//     console.log(res)
+// })
+
+
+// //CPU-Bound : dominada por cálculos, continhas (um loop que soma de 1 a 100)
+// //IO-Bound: dominada por operações de entrada e saída(acesso a arquivos, requisições HTTP)
+// const fs = require('fs')//file system
+// console.log("A")
+// const abrirArquivo = function(nomeArquivo){
+//     //definir uma função callback
+//     const exibirConteudo = function(erro, conteudo){
+//         if(erro){
+//             console.log(`Deu erro: $(erro)`)
+//         }
+//         else{
+//             console.log(conteudo.toString())
+//             const dobro = +conteudo.toString() * 2
+//             const finalizar = function(erro){
+//                 if(erro){
+//                     console.log('Erro ao salvar o dobro')
+//                 }
+//                 else{
+//                     console.log('Salvou o dobro ok')
+//                 }
+//                 console.log("f")
+//             }
+//             fs.writeFile('dobro.txt', dobro.toString(), finalizar)
+//             console.log("E")
+//         }
+//         console.log("D")
+//     }
+//     //chamar a função de leitura do arquivo do módulo fs, entregando a callback como parâmetro
+//     fs.readFile(nomeArquivo, exibirConteudo)
+//     console.log("C")
+// }
+// abrirArquivo("arquivo.txt")
+// console.log("B")
+
+
+// const idade = 18
+// //concatenação
+// console.log("Minha idade é " + idade)
+// //interpolação 
+// console.log(`Minha idade é ${idade}`) 
+
+
+// console.log('script principal começou...')
+// setTimeout(() => {
+//     console.log('dentro da timeout...')
+// }, 0)
+// const data = new Date().getTime() + 10000
+// while(new Date().getTime() <= data);
+// console.log('script principal terminou')
+
+
+// function demorada(){
+//     const atualMais2Segundos = new Date().getTime() + 2000
+//     while(new Date().getTime() <= atualMais2Segundos);
+//     const d=8+4
+//     return d
+// }
+// const a = 2 + 3
+// const b = 5 + 9
+// //const d = demorada()
+// //faz com q nao precise terminar de executar a const d para executar a const e
+// //faz com q a funcao seja executada depois dos 500ms
+// setTimeout(() => {
+//     const d = demorada()
+//     console.log(`d: ${d}`)
+// }, 500)
+// const e = 2 + a + b
+// console.log(`e: ${e}`)
+
+
+// const a = 2+ 7
+// const b = 5
+// console.log(a+b)
+
+// console.log('Eu primeiro...')
+// console.log('Agora eu')
+// console.log('Sempre vou ser a última... :(')
+
+/* //OBJETOS JAVASCRIPT
 //OBJETO JSON (JavaScript Object Notation)
 
 //calculadora
@@ -64,8 +178,7 @@ let pessoa = {
 }
 console.log(pessoa.nome)
 console.log(pessoa['idade'])
-console.log(pessoa.idade)
-
+console.log(pessoa.idade) */
 
 /* function eAgora(){
     let cont = 1
