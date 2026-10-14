@@ -57,6 +57,43 @@ app.post('/lembretes/:id/observacoes', async (req, res) => {
     res.json(observacoesDoLembrete)
 })
 
+app.put('/lembretes/:id/observacoes/:idObs', async (req, res) => {
+    const idLembrete = req.params.id
+    const idObs = req.params.idObs
+    const { texto } = req.body
+    
+    const observacoesDoLembrete = observacoes[idLembrete] || []
+    const observacao = observacoesDoLembrete.find(o => o.id === idObs)
+    if(!observacao){
+        return res.status(404).json({ mensagem: 'Observação não encontrado' })
+    }
+    observacao.texto = texto
+
+    await axios.post('http://localhost:10000/eventos', {
+        tipo: 'ObservacaoAtualizada',
+        dados: observacao
+    })
+    res.json(observacao)
+})
+
+app.delete('/lembretes/:id/observacoes/:idObs', async (req, res) => {
+    const idLembrete = req.params.id
+    const idObs = req.params.idObs
+    const observacoesDoLembrete = observacoes[idLembrete] || []
+    const existe = observacoesDoLembrete.some(o => o.id === idObs)
+
+    if (!existe) {
+        return res.status(404).json({ mensagem: 'Observação não encontrada' })
+    }
+    observacoes[idLembrete] = observacoesDoLembrete.filter(o => o.id !== idObs)
+
+    await axios.post('http://localhost:10000/eventos', {
+        tipo: 'ObservacaoRemovida',
+        dados: { id: idObs, lembreteId: idLembrete }
+    })
+    res.json({ mensagem: 'ok' })
+})
+
 //GET /lembretes/1/observacoes
 //obter o lembrete com id 1 e todas as suas obsevaçoes
 app.get('/lembretes/:id/observacoes', function(req, res){

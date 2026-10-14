@@ -1,0 +1,6 @@
+Microsserviços:
+  1. Implementar endpoints para atualizar e remover lembretes e observações. ou seja, deve ser possível apagar e atualizar lembretes e observações pelo seu id.
+  Já fizemos: POST /lembretes, será necessário, então fazer PUT /lembretes (para atualizar) e DELETE /lembretes (para remover)
+  Em particular, especifique o objeto lembrete a ser atualizado/removido no corpo da requisição
+
+  - a cada operacao, eviar um evento avisaando que ela aconteceu. lembrr de tratar cada novo evento, usando o mapa de funcoes no mss de consulta

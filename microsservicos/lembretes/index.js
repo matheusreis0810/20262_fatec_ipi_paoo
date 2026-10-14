@@ -31,7 +31,7 @@ app.post("/lembretes", async (req, res) => {
         texto: texto
     }
     //emissao de um evento
-    lembretes[id] = lembrete
+    lembretes[id] = lembrete //gera id e armazena na base
     await axios.post('http://localhost:10000/eventos', {
         tipo: 'LembreteCriado',
         dados: lembrete
@@ -40,6 +40,34 @@ app.post("/lembretes", async (req, res) => {
     id++
     res.json({mensagem: 'ok'})
     
+})
+app.put("/lembretes/:id", async (req, res) => {
+    const id = req.params.id
+    const texto = req.body.texto
+    if(!lembretes[id]){
+        return res.status(404).json({ mensagem: 'Lembrete não encontrado' })
+    }
+    lembretes[id].texto= texto
+    await axios.post('http://localhost:10000/eventos', {
+        tipo: 'LembreteAtualizado',
+        dados: lembretes[id]
+    })
+    res.json({mensagem: 'ok'})
+})
+
+app.delete("/lembretes/:id", async (req, res) => {
+    const id = req.params.id
+    if(!lembretes[id]){
+        return res.status(404).json({ mensagem: 'Lembrete não encontrado' })
+    }
+    delete lembretes[id]
+
+    await axios.post('http://localhost:10000/eventos', {
+        tipo: 'LembreteRemovido',
+        dados: { id: id }
+    })
+
+    res.json({ mensagem: 'ok' })
 })
 
 //get /lembrestes usando uma funcao regular (function)
