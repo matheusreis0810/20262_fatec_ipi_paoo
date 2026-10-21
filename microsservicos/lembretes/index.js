@@ -79,8 +79,10 @@ app.get("/lembretes", function(req,res){
 //exibir o evento no log
 //encerrar a requisição, não deixando o cliente esperando
 app.post("/eventos", async (req, res) => {
-    const evento = req.body
-    console.log(evento);
+    try{
+        const evento = req.body
+        console.log(evento);
+    }catch(e){}
     res.end();
 
 })

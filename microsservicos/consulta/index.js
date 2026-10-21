@@ -24,13 +24,13 @@ const funcoes = {
     },
     ObservacaoAtualizada: (observacao) => {
         const observacoes = baseConsulta[observacao.lembreteId]['observacoes']
-        const obs = observacoes.find(o => o.id === observacao.id)
-        obs.texto = observacao.texto
+        const indice = observacoes.findIndex(o => o.id === observacao.id)
+        observacoes[indice] = observacao
     },
     ObservacaoRemovida: (observacao) => {
         const lembrete = baseConsulta[observacao.lembreteId]
         lembrete.observacoes = lembrete.observacoes.filter(o => o.id !== observacao.id)
-    },
+    }
 }
 //GET /lembretes
 app.get('/lembretes', (req, res) => {
@@ -38,9 +38,12 @@ app.get('/lembretes', (req, res) => {
 })
 //POST /eventos
 app.post('/eventos', function(req, res){
-    const evento = req.body
-    console.log(evento)
-    funcoes[evento.tipo](evento.dados) //direciona pra uma função que trata da requisição recebida
+    try{
+        const evento = req.body
+        console.log(evento)
+        funcoes[evento.tipo](evento.dados) //direciona pra uma função que trata da requisição recebida
+    }catch(e){}
+    res.end()
 })
 const port = 6000
 app.listen(port, () => console.log(`Consulta. Porta ${port}`))

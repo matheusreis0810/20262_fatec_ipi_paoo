@@ -4,6 +4,22 @@ const {v4: uuidv4} = require('uuid')
 const app = express()
 app.use(express.json())
 
+const funcoes = {
+    ObservacaoClassificada: (observacao) => {
+        const aux = observacoes[observacao.lembreteId]
+        const obsParaAtualizar = aux.find(o => o.id === observacao.id)
+        obsParaAtualizar.status = observacao.status
+        axios.post('http://localhost:10000/eventos'), {
+            tipo: ObservacaoAtualizada,
+            dados: {
+                id: observacao.id,
+                texto: observacao.texto,
+                lembreteId: observacao.lembreteId,
+                status: observacao.status
+            }
+        }
+    }
+}
 /*
 {
     1: [
@@ -44,7 +60,8 @@ app.post('/lembretes/:id/observacoes', async (req, res) => {
     const observacao = {
         id: idObs,
         texto: texto,
-        lembreteId: req.params.id
+        lembreteId: req.params.id,
+        status: 'aguardando'
     }
     const observacoesDoLembrete = observacoes[req.params.id] || []
     observacoesDoLembrete.push(observacao)
@@ -101,9 +118,13 @@ app.get('/lembretes/:id/observacoes', function(req, res){
 })
 
 app.post('/eventos', (req, res) => {
-    const evento = req.body
-    console.log(evento)
-    res.end
+    try{
+        const evento = req.body
+        console.log(evento)
+        funcoes[evento.tipo](evento.dados)
+    }
+    catch(e){  }
+    res.end()
 })
 
 
