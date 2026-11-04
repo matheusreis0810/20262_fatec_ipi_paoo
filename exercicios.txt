@@ -1,4 +1,10 @@
 Microsserviços:
+  28/10/2026:
+    - No barramento, permitir que sejam obtidos eventos de tipos específicos
+    - No consulta, pedir ao barramento apenas pelos eventos que lhe são de interesse
+    - Ou seja, o consulta só quer LembreteCriado, ObservacaoCriada e ObservacaoAtualizada. Quando ele começar a executar, 
+      ele deve pedir ao barramento somente por esses tipos de eventos. O barramento deve ser adaptado para viabilizar essa funcionalidade.
+ 
   1. Implementar endpoints para atualizar e remover lembretes e observações. ou seja, deve ser possível apagar e atualizar lembretes e observações pelo seu id.
   Já fizemos: POST /lembretes, será necessário, então fazer PUT /lembretes (para atualizar) e DELETE /lembretes (para remover)
   Em particular, especifique o objeto lembrete a ser atualizado/removido no corpo da requisição

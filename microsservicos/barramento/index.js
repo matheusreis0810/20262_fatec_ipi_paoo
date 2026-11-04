@@ -2,6 +2,8 @@ const axios = require('axios')
 const express = require('express')
 const app = express()
 app.use(express.json())
+//guarda os eventos perdidos
+const eventos = []
 //o barramento exibe o corpo da requisicao e direciona o envento para todos os microservicos
 //definir esse endpoint
 //POST /eventos
@@ -10,6 +12,7 @@ app.post("/eventos", async(req, res) =>{ //confirmacao q a emissao dos lembretes
     //pegar o corpo da requisicao
     const evento = req.body
     console.log(evento)
+    eventos.push(evento)
     //enviar via post para todos os mss
     try{
         await axios.post('http://localhost:4000/eventos', evento)
@@ -26,6 +29,18 @@ app.post("/eventos", async(req, res) =>{ //confirmacao q a emissao dos lembretes
     res.end()
 } )
 
+app.get('/eventos', (req, res) => {
+    res.json(eventos)
+})
+
+
+app.get('/eventos', (req, res) => {
+    const { tipo } = req.query
+    if (!tipo) {
+        return res.json(eventos)
+    }
+    res.json(eventos.filter(e => e.tipo === tipo))
+})
 
 //colocar o barramento para operar na porta 10000
 const port = 10000
