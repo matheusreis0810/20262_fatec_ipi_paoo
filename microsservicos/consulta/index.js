@@ -49,7 +49,7 @@ app.post('/eventos', function(req, res){
 const port = 6000
 app.listen(port, async()=> {
     console.log(`Consulta. Porta ${port}`)
-    const resp = await axios.get('http://localhost:10000/eventos')
+    const resp = await axios.get('http://192.168.0.120:10000/eventos') //recupera eventos perdidos
     resp.data.forEach((evento, indice, colecao) => {
         try{
             funcoes[evento.tipo](evento.dados)         

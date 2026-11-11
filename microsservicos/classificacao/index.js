@@ -15,7 +15,7 @@ const funcoes = {
             observacao.status = "importante";
         else
             observacao.status = "comum"; */
-        await axios.post('http://localhost:10000/eventos', {
+        await axios.post('http://192.168.0.120:10000/eventos', {
             tipo: 'ObservacaoClassificada',
             dados: observacao
         })

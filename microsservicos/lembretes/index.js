@@ -32,7 +32,7 @@ app.post("/lembretes", async (req, res) => {
     }
     //emissao de um evento
     lembretes[id] = lembrete //gera id e armazena na base
-    await axios.post('http://localhost:10000/eventos', {
+    await axios.post('http://192.168.0.120:10000/eventos', {
         tipo: 'LembreteCriado',
         dados: lembrete
     })
@@ -48,7 +48,7 @@ app.put("/lembretes/:id", async (req, res) => {
         return res.status(404).json({ mensagem: 'Lembrete não encontrado' })
     }
     lembretes[id].texto= texto
-    await axios.post('http://localhost:10000/eventos', {
+    await axios.post('http://192.168.0.120:10000/eventos', {
         tipo: 'LembreteAtualizado',
         dados: lembretes[id]
     })
@@ -62,7 +62,7 @@ app.delete("/lembretes/:id", async (req, res) => {
     }
     delete lembretes[id]
 
-    await axios.post('http://localhost:10000/eventos', {
+    await axios.post('http://192.168.0.120:10000/eventos', {
         tipo: 'LembreteRemovido',
         dados: { id: id }
     })

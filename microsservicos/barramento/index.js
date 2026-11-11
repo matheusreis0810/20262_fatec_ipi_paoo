@@ -15,16 +15,16 @@ app.post("/eventos", async(req, res) =>{ //confirmacao q a emissao dos lembretes
     eventos.push(evento)
     //enviar via post para todos os mss
     try{
-        await axios.post('http://localhost:4000/eventos', evento)
+        await axios.post('http://192.168.0.120:4000/eventos', evento)
     }catch(e){}
     try{
-        await axios.post('http://localhost:5000/eventos', evento)
+        await axios.post('http://192.168.0.120:5000/eventos', evento)
     }catch(e){}
     try{
-        await axios.post('http://localhost:6000/eventos', evento)
+        await axios.post('http://192.168.0.120:6000/eventos', evento)
     }catch(e){}
     try{
-        await axios.post('http://localhost:7000/eventos', evento)
+        await axios.post('http://192.168.0.120:7000/eventos', evento)
     }catch(e){}
     res.end()
 } )

@@ -9,7 +9,7 @@ const funcoes = {
     const aux = observacoes[observacao.lembreteId]
     const obsParaAtualizar = aux.find(o => o.id === observacao.id)
     obsParaAtualizar.status = observacao.status
-    axios.post('http://localhost:10000/eventos', {
+    axios.post('http://192.168.0.120:10000/eventos', {
       tipo: 'ObservacaoAtualizada',
       dados: {
         id: observacao.id,
@@ -65,7 +65,7 @@ app.post('/lembretes/:id/observacoes', async (req, res) => {
   observacoesDoLembrete.push(observacao)
   observacoes[req.params.id] = observacoesDoLembrete
   //emitir o evento de criação de observação
-  await axios.post('http://localhost:10000/eventos', {
+  await axios.post('http://192.168.0.120:10000/eventos', {
     tipo: 'ObservacaoCriada',
     dados: observacao
   })
